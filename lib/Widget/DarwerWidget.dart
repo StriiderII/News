@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app_route/Origin/AppTheme/app_theme.dart';
+import 'package:news_app_route/cubit/NewCubit.dart';
+import 'package:news_app_route/Widget/CategoriesItem.dart';
+
+// ignore: must_be_immutable
+class DarwerWidget extends StatelessWidget {
+  Function? makeModelNull;
+  Function? makeCasheClear;
+  DarwerWidget({
+    super.key,
+    this.makeCasheClear,
+    this.makeModelNull,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var b = MediaQuery.of(context).size.width;
+    var theme = AppTheme.appTheme(MediaQuery.of(context));
+
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          color: theme.primaryColor,
+          width: b * 0.74,
+          height: h * 0.2,
+          child: Text(
+            'News',
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          width: b * 0.74,
+          height: h * 0.8,
+          color: Colors.white,
+          child: Column(
+            children: [
+              CategoryItem(
+                  icon: Icons.menu,
+                  title: 'Categories',
+                  onClicked: () {
+                    NewsCubit.get(context).makeModelNull(context);
+                  }),
+              SizedBox(
+                height: h * 0.02,
+              ),
+              CategoryItem(
+                  icon: Icons.settings, title: 'settings', onClicked: () {}),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
